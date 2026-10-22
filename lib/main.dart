@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
     ]))),
     const SizedBox(height: 16),
     Card(child: Padding(padding: const EdgeInsets.all(18), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const Text('Agrandissement', style: TextStyle(fontWeight: FontWeight.bold)), DropdownButton<int>(value: scale, isExpanded: true, items: [2,4,8].map((v) => DropdownMenuItem(value:v, child: Text('${v}×'))).toList(), onChanged: busy ? null : (v) => setState(() => scale = v!)),
+      const Text('Agrandissement', style: TextStyle(fontWeight: FontWeight.bold)), DropdownButton<int>(value: scale, isExpanded: true, items: [2,4,8].map((v) => DropdownMenuItem(value:v, child: Text('$v×'))).toList(), onChanged: busy ? null : (v) => setState(() => scale = v!)),
       const Text('Mode', style: TextStyle(fontWeight: FontWeight.bold)), DropdownButton<EnhanceMode>(value: mode, isExpanded: true, items: const [DropdownMenuItem(value: EnhanceMode.rapide, child: Text('Rapide — interpolation locale')), DropdownMenuItem(value: EnhanceMode.standard, child: Text('IA standard — bientôt disponible')), DropdownMenuItem(value: EnhanceMode.maximale, child: Text('Qualité maximale — bientôt disponible')), DropdownMenuItem(value: EnhanceMode.anime, child: Text('Anime — bientôt disponible'))], onChanged: busy ? null : (v) => setState(() => mode = v!)),
       const SizedBox(height: 8), FilledButton.icon(onPressed: source == null || busy ? null : enhance, icon: busy ? const SizedBox(width:18,height:18,child:CircularProgressIndicator(strokeWidth:2)) : const Icon(Icons.auto_fix_high), label: Text(busy ? 'Traitement…' : 'Améliorer l’image')),
     ]))),
