@@ -16,7 +16,7 @@ jobs:
       - name: Generate Android platform files when absent
         run: flutter create --platforms=android --project-name pixelrebuild_ai .
       - run: flutter pub get
-      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: dart format lib test
       - run: flutter analyze
       - run: flutter test
       - run: flutter build apk --debug
