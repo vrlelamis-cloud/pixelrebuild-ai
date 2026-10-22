@@ -1,21 +1,24 @@
 name: pixelrebuild_ai
-description: Application Flutter de reconstruction et d'amélioration d'images.
-publish_to: "none"
-version: 0.1.0+1
+description: Agrandissement d’images local pour Android (Flutter), sans envoi de vos photos.
+publish_to: none
+version: 0.2.0+2
+
 environment:
-  sdk: ">=3.3.0 <4.0.0"
+  sdk: '>=3.4.0 <4.0.0'
+
 dependencies:
+  file_picker: ^8.1.2
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
-  file_picker: ^8.1.2
+  gal: ^2.3.0
   image: ^4.2.0
   path_provider: ^2.1.4
-  share_plus: ^10.0.2
-  cross_file: ^0.3.4+2
+  share_plus: ^10.1.2
+
 dev_dependencies:
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+
 flutter:
   uses-material-design: true

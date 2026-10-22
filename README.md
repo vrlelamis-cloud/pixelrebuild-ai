@@ -1,49 +1,67 @@
-# PixelRebuild AI
+# PixelRebuild
 
-Application Flutter Android de reconstruction et d'amélioration d'images, avec traitement local prioritaire.
+[![CI](https://github.com/vrlelamis-cloud/pixelrebuild-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/vrlelamis-cloud/pixelrebuild-ai/actions/workflows/ci.yml)
+[![Licence : MIT](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
 
-## État actuel
+Application Android (Flutter) qui **agrandit vos images directement sur le téléphone**.
+Aucune photo n’est envoyée sur internet : l’application ne demande aucune permission réseau.
 
-Cette première version publique fournit une base fonctionnelle et honnête :
+## Fonctionnalités
 
-- sélection d'images depuis l'appareil ;
-- analyse et décodage locaux ;
-- agrandissement 2×, 4× et 8× ;
-- interpolation bicubique CPU via le package `image` ;
-- export et partage du résultat ;
-- thème sombre Material 3 ;
-- tests de calcul des dimensions ;
-- workflow GitHub Actions de génération APK.
+- Choix d’une image depuis la galerie (JPEG, PNG, WebP, etc.).
+- Agrandissement ×2, ×4 ou ×8 par interpolation bicubique.
+- Traitement en arrière-plan (Isolate), avec annulation possible.
+- Plafond mémoire : le facteur est réduit automatiquement si le résultat dépasserait 16 Mpx.
+- Comparaison avec l’original, enregistrement dans la galerie et partage.
 
-Les modes IA sont affichés comme indisponibles tant qu'un modèle Android vérifié (licence, opérateurs, poids et performances) n'est pas intégré. Le projet ne prétend donc pas exécuter une super-résolution IA avant cette validation.
+## Ce que l’application fait (et ne fait pas)
 
-## Lancer le projet
+L’agrandissement bicubique **lisse** l’image : il n’invente pas de détails. Les modes
+« IA standard », « Qualité maximale » et « Anime » sont affichés mais **désactivés** :
+ils seront activés lorsqu’un modèle de super-résolution vérifié sera intégré
+(voir la feuille de route).
 
-Installer Flutter stable, puis :
+## Architecture
+
+```
+lib/
+├── main.dart, app.dart        point d’entrée, MaterialApp
+├── core/                      thème, formatage
+├── models/                    EnhanceMode, PickedImage
+├── services/                  planification mémoire, upscaler (Isolate), sélecteur, export
+├── controllers/               EnhanceController (état + actions, services injectés)
+└── ui/                        HomePage et widgets
+test/                          tests unitaires, contrôleur (avec faux services), widget
+tool/                          génération du projet Android
+```
+
+Les services sont des interfaces (`ImageUpscaler`, `ImageSourceService`, `ResultExporter`) :
+un futur moteur IA s’ajoute en implémentant `ImageUpscaler`, sans toucher à l’interface.
+
+## Développement
+
+Prérequis : Flutter 3.47 (stable) et JDK 17.
 
 ```bash
 flutter pub get
-flutter run
-```
-
-Pour générer les fichiers Android manquants dans cette base :
-
-```bash
-flutter create --platforms=android --project-name pixelrebuild_ai .
-```
-
-## Validation
-
-```bash
+dart format .
 flutter analyze
 flutter test
+bash tool/android_setup.sh      # génère le projet Android (non versionné)
 flutter build apk --release
 ```
 
-## Prochaine étape technique
+La CI (`.github/workflows/ci.yml`) exécute ces mêmes étapes et publie l’APK en artefact.
+Le dossier `android/` est généré : `tool/android_setup.sh` fixe l’identifiant
+(`com.pixelrebuild.app`), le nom affiché, `minSdk 24` et un script Gradle `compileSdk 36`.
 
-Évaluer Real-ESRGAN ou un modèle équivalent pour ONNX Runtime Android/TFLite, vérifier sa licence et ses opérateurs, mesurer la mémoire sur plusieurs appareils, puis implémenter une classe native `AiSuperResolutionEngine` derrière l'interface de traitement. Aucun modèle ni poids non vérifié n'est téléchargé automatiquement.
+## Feuille de route
 
-## Limitation connue
+- [ ] Modèle de super-résolution embarqué (TFLite/ONNX) derrière `ImageUpscaler`
+- [ ] Signature de release avec un keystore (secrets GitHub)
+- [ ] Icône d’application et captures d’écran
+- [ ] Traitement par tuiles pour les très grandes images
 
-L'environnement initial de génération ne disposait pas du SDK Flutter ; la compilation sera exécutée par GitHub Actions, qui installe Flutter et génère les plateformes Android avant les tests.
+## Licence
+
+[MIT](LICENSE)

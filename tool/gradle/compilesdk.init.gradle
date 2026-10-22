@@ -1,0 +1,12 @@
+// Force compileSdk 36 sur tous les modules (plugins compilés avec une ancienne version
+// comprise). Copié dans ~/.gradle/init.d/ par tool/android_setup.sh.
+allprojects { p ->
+  p.afterEvaluate {
+    try {
+      def ext = p.extensions.findByName('android')
+      if (ext != null) { ext.compileSdk = 36 }
+    } catch (Throwable t) {
+      println "compileSdk non modifié pour ${p.name}: ${t.message}"
+    }
+  }
+}
