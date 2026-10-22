@@ -65,7 +65,10 @@ class EnhanceController extends ChangeNotifier {
   }
 
   bool get canEnhance =>
-      source != null && !processing && mode.available && (plan?.feasible ?? false);
+      source != null &&
+      !processing &&
+      mode.available &&
+      (plan?.feasible ?? false);
 
   void _notify(String? text, {bool error = false}) {
     message = text;

@@ -10,7 +10,8 @@ class StatusBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final background = isError ? scheme.errorContainer : scheme.secondaryContainer;
+    final background =
+        isError ? scheme.errorContainer : scheme.secondaryContainer;
     final foreground =
         isError ? scheme.onErrorContainer : scheme.onSecondaryContainer;
     return Semantics(

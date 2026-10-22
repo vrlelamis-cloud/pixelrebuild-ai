@@ -175,7 +175,8 @@ void _entry(_Job job) {
     final bytes = File(request.inputPath).readAsBytesSync();
     final decoded = img.decodeImage(bytes);
     if (decoded == null) {
-      port.send(<Object>['error', 'Image illisible ou format non pris en charge.']);
+      port.send(
+          <Object>['error', 'Image illisible ou format non pris en charge.']);
       return;
     }
     final source = img.bakeOrientation(decoded);

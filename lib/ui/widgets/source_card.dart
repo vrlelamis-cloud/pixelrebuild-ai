@@ -19,7 +19,8 @@ class SourceCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text('Image source', style: Theme.of(context).textTheme.titleMedium),
+            Text('Image source',
+                style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 12),
             if (image == null)
               const Text('Aucune image choisie.')
@@ -59,7 +60,8 @@ class SourceCard extends StatelessWidget {
               ),
               onPressed: controller.processing ? null : controller.pickImage,
               icon: const Icon(Icons.photo_library_outlined),
-              label: Text(image == null ? 'Choisir une image' : 'Changer d’image'),
+              label:
+                  Text(image == null ? 'Choisir une image' : 'Changer d’image'),
             ),
           ],
         ),

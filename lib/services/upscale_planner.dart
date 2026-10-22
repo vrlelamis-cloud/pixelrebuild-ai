@@ -41,7 +41,8 @@ class UpscalePlanner {
       throw ArgumentError('Dimensions ou facteur invalides');
     }
     var effective = scale;
-    while (effective > 1 && width * effective * height * effective > maxPixels) {
+    while (
+        effective > 1 && width * effective * height * effective > maxPixels) {
       effective--;
     }
     return UpscalePlan(

@@ -13,14 +13,16 @@ void main() {
 
     test('réduit le facteur pour ne pas dépasser le plafond de pixels', () {
       final plan = UpscalePlanner.plan(width: 4000, height: 3000, scale: 8);
-      expect(plan.pixels, lessThanOrEqualTo(UpscalePlanner.defaultMaxOutputPixels));
+      expect(plan.pixels,
+          lessThanOrEqualTo(UpscalePlanner.defaultMaxOutputPixels));
       expect(plan.effectiveScale, 1);
       expect(plan.feasible, isFalse);
 
       final mid = UpscalePlanner.plan(width: 1500, height: 1000, scale: 8);
       expect(mid.limited, isTrue);
       expect(mid.effectiveScale, lessThan(8));
-      expect(mid.pixels, lessThanOrEqualTo(UpscalePlanner.defaultMaxOutputPixels));
+      expect(
+          mid.pixels, lessThanOrEqualTo(UpscalePlanner.defaultMaxOutputPixels));
       expect(mid.feasible, isTrue);
     });
 

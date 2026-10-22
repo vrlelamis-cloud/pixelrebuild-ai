@@ -26,7 +26,8 @@ void main() {
   test('agrandit réellement l’image dans un Isolate', () async {
     const upscaler = BicubicUpscaler();
     final task = upscaler.start(
-      UpscaleRequest(inputPath: input, outputPath: '${dir.path}/out.png', scale: 2),
+      UpscaleRequest(
+          inputPath: input, outputPath: '${dir.path}/out.png', scale: 2),
     );
     final result = await task.result;
     expect(result.width, 40);
@@ -67,7 +68,8 @@ void main() {
   test('l’annulation interrompt la tâche', () async {
     const upscaler = BicubicUpscaler();
     final task = upscaler.start(
-      UpscaleRequest(inputPath: input, outputPath: '${dir.path}/c.png', scale: 2),
+      UpscaleRequest(
+          inputPath: input, outputPath: '${dir.path}/c.png', scale: 2),
     )..cancel();
     await expectLater(task.result, throwsA(isA<UpscaleCancelled>()));
   });

@@ -30,8 +30,9 @@ class OptionsCard extends StatelessWidget {
                   ButtonSegment<int>(value: value, label: Text('$value×')),
               ],
               selected: <int>{controller.scale},
-              onSelectionChanged:
-                  busy ? null : (selection) => controller.setScale(selection.first),
+              onSelectionChanged: busy
+                  ? null
+                  : (selection) => controller.setScale(selection.first),
             ),
             const SizedBox(height: 16),
             DropdownMenu<EnhanceMode>(
@@ -46,7 +47,8 @@ class OptionsCard extends StatelessWidget {
                 for (final mode in EnhanceMode.values)
                   DropdownMenuEntry<EnhanceMode>(
                     value: mode,
-                    label: mode.available ? mode.label : '${mode.label} (bientôt)',
+                    label:
+                        mode.available ? mode.label : '${mode.label} (bientôt)',
                     enabled: mode.available,
                   ),
               ],
@@ -64,7 +66,8 @@ class OptionsCard extends StatelessWidget {
                 Text(
                   'Facteur limité à ${plan.effectiveScale}× '
                   'pour préserver la mémoire.',
-                  style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.tertiary),
                 ),
             ],
             const SizedBox(height: 16),

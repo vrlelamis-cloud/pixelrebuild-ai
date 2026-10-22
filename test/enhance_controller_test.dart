@@ -17,7 +17,8 @@ void main() {
   late FakeExporter exporter;
   late EnhanceController controller;
 
-  const photo = PickedImage(path: '/tmp/a.jpg', name: 'a.jpg', width: 100, height: 50);
+  const photo =
+      PickedImage(path: '/tmp/a.jpg', name: 'a.jpg', width: 100, height: 50);
 
   setUp(() {
     dir = Directory.systemTemp.createTempSync('pixelrebuild_ctrl');
