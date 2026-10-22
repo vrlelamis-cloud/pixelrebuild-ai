@@ -1,11 +1,23 @@
-# Flutter/Dart
+# Dart / Flutter
 .dart_tool/
 .packages
-.pub-cache/
-build/
 .flutter-plugins
 .flutter-plugins-dependencies
-.pub/
+build/
+coverage/
+pubspec.lock
+
+# Projet Android généré par tool/android_setup.sh
+android/
+
+# Secrets et signature
+*.jks
+*.keystore
+key.properties
+.env
+
+# Divers
 .idea/
-.vscode/
 *.iml
+.DS_Store
+*.log
